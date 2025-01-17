@@ -20,11 +20,11 @@
                 sex.forEach(element => {
                     try {
                         const ytdata = JSON.parse(element);
-                        urls.push(ytdata.id);
+                        urls.push("youtube "+ytdata.id);
                     } catch { };
                 });
                 function buttonClick() {
-                    const ary = urls.join("\n").split("");
+                    const ary = (urls.join("\n")+"\n").split("");
                     const blob = new Blob(ary, { type: "text/plan" });
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(blob);
