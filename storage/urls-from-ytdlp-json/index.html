@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <input type="file" name="" id="jsonInput" accept=".json">
+    <script>
+
+        document.getElementById("jsonInput").addEventListener('change', (e) => {
+            const reader = new FileReader();
+
+            reader.addEventListener("load", (e) => {
+                const sex = e.target.result.split("\n");
+                let urls = [];
+                sex.forEach(element => {
+                    try {
+                        const ytdata = JSON.parse(element);
+                        urls.push(ytdata.id);
+                    } catch { };
+                });
+                function buttonClick() {
+                    const ary = urls.join("\n").split("");
+                    const blob = new Blob(ary, { type: "text/plan" });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'archive.txt';
+                    link.click();
+                };
+                buttonClick();
+            });
+
+            reader.readAsText(e.target.files[0]);
+
+        });
+    </script>
+</body>
+
+</html>
